@@ -28,7 +28,7 @@
                 <td>@book.Year</td>
                 <td>@(book.IsAvailable ? "Yes" : "No")</td>
                 <td>
-                    <a href="@Url.Page("AddEdit", new { id = book.Id })">Edit</a> |
+                    <a href="@Url.Page("Book", new { id = book.Id })">Edit</a> |
                     <a href="javascript:void(0);" onclick="if (confirm('Are you sure you want to delete?')) { window.location.href = '@Url.Page("Delete", new { id = book.Id })'; }">Delete</a>
                 </td>
             </tr>
