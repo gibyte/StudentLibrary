@@ -17,18 +17,34 @@ namespace StudentLibrary.Pages
         [BindProperty]
         public Book Book { get; set; }
 
-        public void OnGet()
+        public void OnGet(int id)
         {
-        }
-
-        public void OnPost()
-        {
-            if (ModelState.IsValid)
+            if (id > 0)
             {
-                _context.Books.Add(Book);
-                _context.SaveChanges();
+                Book = _context.Books.FirstOrDefault(b => b.Id == id);
+            }
+            else
+            {
+                Book = new Book() { Author = "", Title = ""};
             }
         }
 
+        public IActionResult OnPost()
+        {
+            if (ModelState.IsValid)
+            {
+                if (Book.Id == 0)
+                {
+                    _context.Books.Add(Book);
+                }
+                else
+                {
+                    _context.Books.Update(Book);
+                }
+                _context.SaveChanges();
+                return RedirectToPage("Books");
+            }
+            return Page();
+        }
     }
 }
