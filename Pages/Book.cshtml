@@ -1,0 +1,19 @@
+﻿@page
+@model StudentLibrary.Pages.BookModel
+@{
+}
+
+<h2>Добавить книгу</h2>
+
+<form method="post">
+    <label>Название:</label>
+    <input type="text" asp-for="Book.Title" />
+    <br />
+    <label>Автор:</label>
+    <input type="text" asp-for="Book.Author" />
+    <br />
+    <label>Год издания:</label>
+    <input type="number" asp-for="Book.Year" />
+    <br />
+    <button type="submit">Сохранить</button>
+</form>
