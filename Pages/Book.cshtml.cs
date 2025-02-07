@@ -31,20 +31,16 @@ namespace StudentLibrary.Pages
 
         public IActionResult OnPost()
         {
-            if (ModelState.IsValid)
+            if (Book.Id == 0)
             {
-                if (Book.Id == 0)
-                {
-                    _context.Books.Add(Book);
-                }
-                else
-                {
-                    _context.Books.Update(Book);
-                }
-                _context.SaveChanges();
-                return RedirectToPage("Books");
+                _context.Books.Add(Book);
             }
-            return Page();
+            else
+            {
+                _context.Books.Update(Book);
+            }
+            _context.SaveChanges();
+            return RedirectToPage("Books");
         }
     }
 }
