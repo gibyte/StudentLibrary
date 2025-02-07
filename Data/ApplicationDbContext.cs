@@ -12,7 +12,7 @@ namespace StudentLibrary.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            Database.Migrate(); // Автоматически применяет миграции и создаёт базу, если её нет
+            //Database.Migrate(); // Автоматически применяет миграции и создаёт базу, если её нет
         } 
 
         public DbSet<Book> Books { get; set; } //таблица Books, содержащая данные о книгах.
