@@ -14,7 +14,7 @@ namespace StudentLibrary.Model
         [StringLength(100, ErrorMessage = "Автор не может быть длиннее 100 символов.")]
         public required string Author { get; set; }
 
-        [Range(1000, 2100, ErrorMessage = "Год должен быть между 1000 и 9999.")]
+        [Range(1000, 2100, ErrorMessage = "Год должен быть между 1000 и 2100.")]
         public int Year { get; set; }
         public bool IsAvailable { get; set; } = true;
     }
