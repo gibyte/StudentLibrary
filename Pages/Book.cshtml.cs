@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StudentLibrary.Data;
 using StudentLibrary.Model;
+using System;
 
 namespace StudentLibrary.Pages
 {
@@ -25,12 +26,16 @@ namespace StudentLibrary.Pages
             }
             else
             {
-                Book = new Book() { Author = "", Title = ""};
+                Book = new Book() { Author = "", Title = "" };
             }
         }
 
         public IActionResult OnPost()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
             if (Book.Id == 0)
             {
                 _context.Books.Add(Book);

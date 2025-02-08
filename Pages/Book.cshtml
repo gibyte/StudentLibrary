@@ -3,27 +3,31 @@
 @{
 }
 
-<h2>@(Model.Book.Id == 0 ? "Add New Book" : "Edit Book")</h2>
+<h2>@ViewData["Title"]</h2>
 
 <form method="post">
+    
     <div class="form-group">
-        <label for="Title">Title</label>
-        <input type="text" class="form-control" id="Title" name="Title" value="@Model.Book.Title" required />
+        <label asp-for="Book.Title">Название</label>
+        <input asp-for="Book.Title" type="text" class="form-control" />
+        <span asp-validation-for="Book.Title" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label for="Author">Author</label>
-        <input type="text" class="form-control" id="Author" name="Author" value="@Model.Book.Author" required />
+        <label asp-for="Book.Author">Автор</label>
+        <input asp-for="Book.Author" type="text" class="form-control" />
+        <span asp-validation-for="Book.Author" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label for="Year">Year</label>
-        <input type="number" class="form-control" id="Year" name="Year" value="@Model.Book.Year" required />
+        <label asp-for="Book.Year">Год</label>
+        <input asp-for="Book.Year" type="number" class="form-control" />
+        <span asp-validation-for="Book.Year" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label for="IsAvailable">Available</label>
-        <input type="checkbox" id="IsAvailable" name="IsAvailable" checked="@Model.Book.IsAvailable" />
+        <label asp-for="Book.IsAvailable">Available</label>
+        <input type="checkbox" asp-for="Book.IsAvailable" />
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
