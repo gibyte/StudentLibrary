@@ -1,0 +1,42 @@
+﻿@page
+@model StudentLibrary.Pages.StudentsModel
+@{
+
+}
+
+
+<h4>Список студентов</h4>
+<a asp-page="StudentForm" class="btn btn-primary">Добавить студента</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Email</th>
+            <th>Телефон</th>
+            <th>Дата рождения</th>
+            <th>Пол</th>
+            <th>Активен</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model.Students)
+        {
+            <tr>
+                <td>@student.Name</td>
+                <td>@student.Email</td>
+                <td>@student.Phone</td>
+                <td>@student.BirthDate.ToShortDateString()</td>
+                <td>@student.Gender</td>
+                <td>@(student.IsActive ? "Да" : "Нет")</td>
+                <td>
+                    <a asp-page="EditStudent" asp-route-id="@student.Id" class="btn btn-warning">Изменить</a>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@student.Id" style="display:inline;">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить студента?')">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
