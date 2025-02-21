@@ -4,10 +4,8 @@
 
 }
 
-
 <h4>Список студентов</h4>
-<a asp-page="StudentForm" class="btn btn-primary">Добавить студента</a>
-
+<a class="btn btn-primary" href="@Url.Page("Student", new { id = 0 })">Добавить студента</a>
 <table class="table">
     <thead>
         <tr>
@@ -31,7 +29,7 @@
                 <td>@student.Gender</td>
                 <td>@(student.IsActive ? "Да" : "Нет")</td>
                 <td>
-                    <a asp-page="EditStudent" asp-route-id="@student.Id" class="btn btn-warning">Изменить</a>
+                    <a asp-page="Student" asp-route-id="@student.Id" class="btn btn-warning">Изменить</a>
                     <form method="post" asp-page-handler="Delete" asp-route-id="@student.Id" style="display:inline;">
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить студента?')">Удалить</button>
                     </form>

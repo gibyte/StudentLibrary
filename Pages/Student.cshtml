@@ -1,0 +1,66 @@
+﻿@page "{id:int?}"
+@model StudentLibrary.Pages.StudentModel
+@{
+}
+
+<h4>Карточка студента</h4>
+
+<form method="post">
+    
+    <input type="hidden" asp-for="Student.Id" />
+
+    <label>Имя:</label>
+    <input type="text" asp-for="Student.Name" required />
+    <span asp-validation-for="Student.Name"></span>
+    <br />
+
+    <label>Email:</label>
+    <input type="email" asp-for="Student.Email" />
+    <span asp-validation-for="Student.Email"></span>
+    <br />
+
+    <label>Телефон:</label>
+    <input type="tel" asp-for="Student.Phone" />
+    <span asp-validation-for="Student.Phone"></span>
+    <br />
+
+    <label>Дата рождения:</label>
+    <input type="date" asp-for="Student.BirthDate" required />
+    <span asp-validation-for="Student.BirthDate"></span>
+    <br />
+
+    <label>Пол:</label>
+    <select asp-for="Student.Gender">
+        <option value="Male">Мужской</option>
+        <option value="Female">Женский</option>
+    </select>
+    <span asp-validation-for="Student.Gender"></span>
+    <br />
+
+    <label>Факультет:</label>
+    <select asp-for="Student.Faculty">
+        <option value="IT">IT</option>
+        <option value="Economics">Экономика</option>
+        <option value="Physics">Физика</option>
+    </select>
+    <br />
+
+    <label>Курс:</label>
+    <input type="number" asp-for="Student.Course" min="1" max="5" required />
+    <span asp-validation-for="Student.Course"></span>
+    <br />
+
+    <label>Адрес:</label>
+    <textarea asp-for="Student.Address"></textarea>
+    <br />
+
+    <label>Активен:</label>
+    <input type="checkbox" asp-for="Student.IsActive" />
+    <br />
+
+    <label>Комментарии:</label>
+    <textarea asp-for="Student.Comments"></textarea>
+    <br />
+
+    <button type="submit">Сохранить</button>
+</form>
