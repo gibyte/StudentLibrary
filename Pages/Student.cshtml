@@ -1,0 +1,79 @@
+﻿@page "{id:int?}"
+@model StudentLibrary.Pages.StudentModel
+@{
+}
+<form method="post" class="needs-validation" novalidate>
+
+    <input type="hidden" asp-for="Student.Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Имя:</label>
+        <input type="text" class="form-control" asp-for="Student.Name" required />
+        <span class="text-danger" asp-validation-for="Student.Name"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email:</label>
+        <input type="email" class="form-control" asp-for="Student.Email" />
+        <span class="text-danger" asp-validation-for="Student.Email"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Телефон:</label>
+        <input type="tel" class="form-control" asp-for="Student.Phone" />
+        <span class="text-danger" asp-validation-for="Student.Phone"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Дата рождения:</label>
+        <input type="date" class="form-control" asp-for="Student.BirthDate" required />
+        <span class="text-danger" asp-validation-for="Student.BirthDate"></span>
+    </div>
+
+    <input type="number" name="age" min="18" max="100">
+
+    <div class="mb-3">
+        <label class="form-label">Пол:</label>
+        <select class="form-select" asp-for="Student.Gender">
+            <option value="Male">Мужской</option>
+            <option value="Female">Женский</option>
+        </select>
+        <span class="text-danger" asp-validation-for="Student.Gender"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Факультет:</label>
+        <select class="form-select" asp-for="Student.Faculty">
+            <option value="IT">IT</option>
+            <option value="Economics">Экономика</option>
+            <option value="Physics">Физика</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Курс:</label>
+        <input type="number" class="form-control" asp-for="Student.Course" min="1" max="5" required />
+        <span class="text-danger" asp-validation-for="Student.Course"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Адрес:</label>
+        <textarea class="form-control" asp-for="Student.Address"></textarea>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" asp-for="Student.IsActive" />
+        <label class="form-check-label">Активен</label>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Комментарии:</label>
+        <textarea class="form-control" asp-for="Student.Comments"></textarea>
+    </div>
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a asp-page="/Students" class="btn btn-secondary">Отмена</a>
+    </div>
+
+</form>
