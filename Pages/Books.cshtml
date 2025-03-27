@@ -3,35 +3,26 @@
 @{
 }
 
-<h2>Books</h2>
-
 <p>
     <a class="btn btn-primary" href="@Url.Page("Book", new { id = 0 })">Add New Book</a>
 </p>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Year</th>
-            <th>Available</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var book in Model.Books)
-        {
-            <tr>
-                <td>@book.Title</td>
-                <td>@book.Author</td>
-                <td>@book.Year</td>
-                <td>@(book.IsAvailable ? "Yes" : "No")</td>
-                <td>
-                    <a href="@Url.Page("Book", new { id = book.Id })">Edit</a> |
-                    <a href="javascript:void(0);" onclick="if (confirm('Are you sure you want to delete?')) { window.location.href = '@Url.Page("BookDelete", new { id = book.Id })'; }">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var book in Model.Books)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">@book.Title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@book.Author</h6>
+                    <p class="card-text">Published: @book.Year</p>
+                    <p class="card-text">Available: @(book.IsAvailable ? "Yes" : "No")</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="@Url.Page("Book", new { id = book.Id })" class="btn btn-warning">Edit</a>
+                    <a href="javascript:void(0);" class="btn btn-danger" onclick="if (confirm('Are you sure you want to delete?')) { window.location.href = '@Url.Page("BookDelete", new { id = book.Id })'; }">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

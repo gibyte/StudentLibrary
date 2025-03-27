@@ -3,35 +3,46 @@
 @{
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h4 class="mb-0">@ViewData["Title"]</h4>
+        </div>
+        <div class="card-body p-4">
+            <form method="post" class="needs-validation" novalidate>
+                <input type="hidden" asp-for="Book.Id" />
 
-<form method="post">
-    
-    <input type="hidden" asp-for="Book.Id" />
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Название:</label>
+                        <input type="text" class="form-control" asp-for="Book.Title" required />
+                        <span class="text-danger" asp-validation-for="Book.Title"></span>
+                    </div>
 
-    <div class="form-group">
-        <label asp-for="Book.Title">Название</label>
-        <input asp-for="Book.Title" type="text" class="form-control" />
-        <span asp-validation-for="Book.Title" class="text-danger"></span>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Автор:</label>
+                        <input type="text" class="form-control" asp-for="Book.Author" required />
+                        <span class="text-danger" asp-validation-for="Book.Author"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Год:</label>
+                        <input type="number" class="form-control" asp-for="Book.Year" required />
+                        <span class="text-danger" asp-validation-for="Book.Year"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" asp-for="Book.IsAvailable" />
+                        <label class="form-check-label fw-bold">Доступна</label>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2 justify-content-center mt-4">
+                    <button type="submit" class="btn btn-success px-4">Сохранить</button>
+                    <button type="reset" class="btn btn-outline-secondary px-4">Сбросить</button>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
 
-    <div class="form-group">
-        <label asp-for="Book.Author">Автор</label>
-        <input asp-for="Book.Author" type="text" class="form-control" />
-        <span asp-validation-for="Book.Author" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Book.Year">Год</label>
-        <input asp-for="Book.Year" type="number" class="form-control" />
-        <span asp-validation-for="Book.Year" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Book.IsAvailable">Available</label>
-        <input type="checkbox" asp-for="Book.IsAvailable" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Save</button>
-    <button type="reset">Сбросить</button>
-</form>
