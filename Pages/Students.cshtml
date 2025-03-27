@@ -4,37 +4,30 @@
 
 }
 
-<h4>Список студентов</h4>
-<a class="btn btn-primary" href="@Url.Page("Student", new { id = 0 })">Добавить студента</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Имя</th>
-            <th>Email</th>
-            <th>Телефон</th>
-            <th>Дата рождения</th>
-            <th>Пол</th>
-            <th>Активен</th>
-            <th>Действия</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var student in Model.Students)
-        {
-            <tr>
-                <td>@student.Name</td>
-                <td>@student.Email</td>
-                <td>@student.Phone</td>
-                <td>@student.BirthDate.ToShortDateString()</td>
-                <td>@student.Gender</td>
-                <td>@(student.IsActive ? "Да" : "Нет")</td>
-                <td>
+<a class="btn btn-primary mb-3" href="@Url.Page("Student", new { id = 0 })">Добавить студента</a>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var student in Model.Students)
+    {
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">@student.Name</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@student.Email</h6>
+                    <p class="card-text">
+                        <strong>Телефон:</strong> @student.Phone <br>
+                        <strong>Дата рождения:</strong> @student.BirthDate.ToShortDateString() <br>
+                        <strong>Пол:</strong> @student.Gender <br>
+                        <strong>Активен:</strong> @(student.IsActive ? "Да" : "Нет")
+                    </p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
                     <a asp-page="Student" asp-route-id="@student.Id" class="btn btn-warning">Изменить</a>
-                    <form method="post" asp-page-handler="Delete" asp-route-id="@student.Id" style="display:inline;">
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@student.Id">
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить студента?')">Удалить</button>
                     </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
