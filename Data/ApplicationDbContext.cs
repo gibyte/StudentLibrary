@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using StudentLibrary.Model;
+using StudentLibrary.Model.AuthApp;
 
 namespace StudentLibrary.Data
 {
@@ -18,5 +19,6 @@ namespace StudentLibrary.Data
         public DbSet<Book> Books { get; set; } //таблица Books, содержащая данные о книгах.
         public DbSet<Student> Students { get; set; } //таблица Students, содержащая данные о студентах.
         public DbSet<Loan> Loans { get; set; } //таблица Loans, хранящая информацию о выдачах книг студентам.
+        public DbSet<AuthUser> AuthUsers { get; set; }
     }
 }
