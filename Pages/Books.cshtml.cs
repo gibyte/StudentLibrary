@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using StudentLibrary.Data;
 using StudentLibrary.Model;
 
 namespace StudentLibrary.Pages
 {
+    [Authorize]
     public class BooksModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -18,7 +21,7 @@ namespace StudentLibrary.Pages
 
         public void OnGet()
         {
-            Books = _context.Books.ToList();
+            Books = _context.Books.Include(a => a.Author).ToList();
         }
     }
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StudentLibrary.Data;
@@ -6,6 +7,7 @@ using System;
 
 namespace StudentLibrary.Pages
 {
+    [Authorize]
     public class BookModel : PageModel
     {
         private readonly ApplicationDbContext _context;
