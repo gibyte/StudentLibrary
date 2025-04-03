@@ -6,15 +6,12 @@ using StudentLibrary.Data;
 using StudentLibrary.Model.AuthApp;
 using System.Security.Claims;
 
-namespace StudentLibrary.Views.Account
+namespace StudentLibrary.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController(ApplicationDbContext context) : Controller
     {
-        private ApplicationDbContext _context;
-        public AccountController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private ApplicationDbContext _context = context;
+
         [HttpGet]
         public IActionResult Login()
         {
