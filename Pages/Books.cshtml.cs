@@ -21,7 +21,7 @@ namespace StudentLibrary.Pages
 
         public void OnGet()
         {
-            Books = _context.Books.Include(a => a.Author).ToList();
+            Books = _context.Books.ToList();
         }
     }
 }

@@ -6,16 +6,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddHttpContextAccessor(); // авторизация
 
 // Настройка подключения к базе данных
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("StudentLibraryDb")));
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+// авторизация ++ 
+builder.Services.AddAuthentication("Cookies")
+    .AddCookie("Cookies", options =>
     {
-        options.LoginPath = new PathString("/Account/Login");
+        options.LoginPath = "/Account/Login"; // путь к странице входа
+        options.AccessDeniedPath = "/Account/AccessDenied"; // опционально — если доступ запрещен
     });
+
+// авторизация --
 
 var app = builder.Build();
 
@@ -31,11 +36,7 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseAuthorization();// авторизация
 
 app.UseStaticFiles();
 app.MapStaticAssets();

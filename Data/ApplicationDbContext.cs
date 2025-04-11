@@ -20,5 +20,6 @@ namespace StudentLibrary.Data
         public DbSet<Student> Students { get; set; } //таблица Students, содержащая данные о студентах.
         public DbSet<Loan> Loans { get; set; } //таблица Loans, хранящая информацию о выдачах книг студентам.
         public DbSet<AuthUser> AuthUsers { get; set; }
+
     }
 }

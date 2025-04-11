@@ -7,7 +7,7 @@ using System;
 
 namespace StudentLibrary.Pages
 {
-    [Authorize]
+    [Authorize]// авторизация
     public class BookModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -28,7 +28,7 @@ namespace StudentLibrary.Pages
             }
             else
             {
-                Book = new Book() { Author = "", Title = "" };
+                Book = new Book();
             }
         }
 
