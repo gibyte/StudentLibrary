@@ -7,7 +7,6 @@ using StudentLibrary.Model;
 
 namespace StudentLibrary.Pages
 {
-    [Authorize]
     public class BooksModel : PageModel
     {
         private readonly ApplicationDbContext _context;
