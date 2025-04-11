@@ -7,7 +7,7 @@ using System;
 
 namespace StudentLibrary.Pages
 {
-    [Authorize]// авторизация
+    [Authorize(Roles = "Admin")]// авторизация
     public class BookModel : PageModel
     {
         private readonly ApplicationDbContext _context;

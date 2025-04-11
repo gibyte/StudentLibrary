@@ -27,11 +27,13 @@ namespace StudentLibrary.Pages.Account
             if (!ModelState.IsValid)
                 return Page();
 
+            bool isFirstUser = !_context.AuthUsers.Any();
+
             var user = _context.AuthUsers.FirstOrDefault(u => u.Email == Input.Email);
 
             if (user == null)
             {
-                _context.AuthUsers.Add(new AuthUser { Email = Input.Email, Password = Input.Password });
+                _context.AuthUsers.Add(new AuthUser { Email = Input.Email, Password = Input.Password, Role = isFirstUser ? "Admin" : "User" });
                 await _context.SaveChangesAsync();
 
                 await Authenticate(Input.Email);

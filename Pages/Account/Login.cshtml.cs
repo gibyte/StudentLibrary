@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StudentLibrary.Data;
 using System.Security.Claims;
+using System.Data;
 
 namespace StudentLibrary.Pages.Account
 {
@@ -30,7 +31,7 @@ namespace StudentLibrary.Pages.Account
 
             if (user != null)
             {
-                await Authenticate(Input.Email);
+                await Authenticate(Input.Email, user.Role); // передаем и роль
                 return RedirectToPage("/Index");
             }
 
@@ -38,11 +39,12 @@ namespace StudentLibrary.Pages.Account
             return Page();
         }
 
-        private async Task Authenticate(string userName)
+        private async Task Authenticate(string userName, string role)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userName),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, role) //аутентификация
             };
 
             var identity = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
