@@ -4,11 +4,36 @@
     ViewData["Title"] = "Профиль";
 }
 
-<h2>Профиль</h2>
-
 <div class="card mt-3">
     <div class="card-body">
-        <h5 class="card-title">Добро пожаловать, @Model.UserEmail!</h5>
-        <p class="card-text">Это ваша страница профиля. Здесь можно отобразить дополнительную информацию о пользователе.</p>
+        <h5 class="card-title">Добро пожаловать, @Model.CurrentUser.Email!</h5>
+
+        <form method="post" class="mt-3">
+            <input type="hidden" asp-for="CurrentUser.Id" />
+            <div class="mb-3">
+                <label asp-for="CurrentUser.Email" class="form-label">Email</label>
+                <input asp-for="CurrentUser.Email" class="form-control" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CurrentUser.Role" class="form-label">Роль</label>
+                @if (Model.IsAdmin)
+                {
+                    <select asp-for="CurrentUser.Role" class="form-select">
+                        <option>User</option>
+                        <option>Admin</option>
+                    </select>
+                }
+                else
+                {
+                    <input asp-for="CurrentUser.Role" class="form-control" readonly />
+                }
+            </div>
+
+            @if (true || Model.IsAdmin)
+            {
+                <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+            }
+        </form>
     </div>
 </div>
