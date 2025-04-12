@@ -10,7 +10,7 @@
         <div class="col-md-6">
             <h2>Регистрация</h2>
             <form method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+               
 
                 <div class="form-group">
                     <label asp-for="Input.Email">Email</label>
@@ -29,6 +29,8 @@
                     <input asp-for="Input.ConfirmPassword" type="password" class="form-control" />
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
             </form>

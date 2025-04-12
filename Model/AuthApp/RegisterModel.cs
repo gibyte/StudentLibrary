@@ -12,7 +12,7 @@ namespace StudentLibrary.Model.AuthApp
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Пароль введен неверно")]
+        [Compare("Password", ErrorMessage = "Подтверждение введено неверно")]
         public string ConfirmPassword { get; set; }
     }
 }
