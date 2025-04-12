@@ -7,7 +7,8 @@ using StudentLibrary.Model;
 
 namespace StudentLibrary.Pages
 {
-    [Authorize]// авторизация
+
+    [Authorize(Roles = "Admin,User")]
     public class StudentModel(ApplicationDbContext context) : PageModel
     {
         private readonly ApplicationDbContext _context = context;
@@ -23,7 +24,7 @@ namespace StudentLibrary.Pages
             }
             else
             {
-                Student = new Student() { Name = "Новый" };
+                Student = new Student() { Name = "ГЌГ®ГўГ»Г©" };
             }
         }
 

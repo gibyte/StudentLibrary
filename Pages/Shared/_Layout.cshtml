@@ -4,6 +4,7 @@
     var user = HttpContextAccessor.HttpContext?.User;
     var isAuthenticated = user?.Identity?.IsAuthenticated ?? false;
     var userName = user?.Identity?.Name ?? "";
+    var isAdmin = user?.IsInRole("Admin") ?? false;
 }
 @*-- авторизация*@
 <!DOCTYPE html>
@@ -39,7 +40,13 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Конфиденциальность</a>
-                        </li> 
+                        </li>
+                        @if (isAdmin)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Account/Profiles">Пользователи</a>
+                            </li>
+                        }
                     </ul>
                     @*++ авторизация*@
                     <ul class="navbar-nav ms-auto">
