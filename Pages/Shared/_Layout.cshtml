@@ -1,4 +1,4 @@
-﻿@*++ авторизация*@
+@*++ авторизация*@
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     var user = HttpContextAccessor.HttpContext?.User;
@@ -7,7 +7,7 @@
 }
 @*-- авторизация*@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" data-bs-theme="auto">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -39,7 +39,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Конфиденциальность</a>
-                        </li>
+                        </li> 
                     </ul>
                     @*++ авторизация*@
                     <ul class="navbar-nav ms-auto">
@@ -68,6 +68,11 @@
                                 </ul>
                             </li>
                         }
+                        @*+++ темная тема*@
+                        <li class="nav-item">
+                            <button class="btn btn-outline-secondary" onclick="toggleTheme()">🌓 Переключить тему</button>
+                        </li>
+                        @*--- темная тема*@
                     </ul>
                     @*--- авторизация*@
                     
@@ -94,3 +99,22 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<script>
+    const html = document.documentElement;
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    html.setAttribute("data-bs-theme", prefersDark ? "dark" : "light");
+
+    // отслеживание изменения темы в системе
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
+        html.setAttribute("data-bs-theme", e.matches ? "dark" : "light");
+    });
+</script>
+
+<script>
+    function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute("data-bs-theme");
+        html.setAttribute("data-bs-theme", currentTheme === "dark" ? "light" : "dark");
+    }
+</script>
