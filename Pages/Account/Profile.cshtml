@@ -10,6 +10,7 @@
 
         <form method="post" class="mt-3">
             <input type="hidden" asp-for="CurrentUser.Id" />
+            <input type="hidden" asp-for="CurrentUser.Password" />
             <div class="mb-3">
                 <label asp-for="CurrentUser.Email" class="form-label">Email</label>
                 <input asp-for="CurrentUser.Email" class="form-control" readonly />
@@ -30,7 +31,7 @@
                 }
             </div>
 
-            @if (true || Model.IsAdmin)
+            @if (Model.IsAdmin)
             {
                 <button type="submit" class="btn btn-primary">Сохранить изменения</button>
             }

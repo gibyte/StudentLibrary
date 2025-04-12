@@ -6,7 +6,7 @@ using StudentLibrary.Model.AuthApp;
 
 namespace StudentLibrary.Pages.Account
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProfilesModel : PageModel
     {
         

@@ -21,12 +21,19 @@ namespace StudentLibrary.Pages.Account
 
         public bool IsAdmin => User.IsInRole("Admin");
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(int id = 0)
         {
-            var email = User.Identity?.Name;
-            if (email == null) return RedirectToPage("/Account/Login");
+            if (id == 0)
+            {
+                var email = User.Identity?.Name;
+                if (email == null) return RedirectToPage("/Account/Login");
 
-            CurrentUser = _context.AuthUsers.FirstOrDefault(u => u.Email == email);
+                CurrentUser = _context.AuthUsers.FirstOrDefault(u => u.Email == email);
+            }
+            else
+            {
+                CurrentUser = _context.AuthUsers.FirstOrDefault(u => u.Id == id);
+            }
             if (CurrentUser == null) return NotFound();
 
             return Page();
