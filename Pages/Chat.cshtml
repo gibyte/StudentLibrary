@@ -1,0 +1,53 @@
+﻿@page
+@model StudentLibrary.Pages.ChatModel
+@{
+}
+<h2>Чат</h2>
+
+<div class="mb-3">
+    <strong>Вы вошли как:</strong> @Model.UserName
+</div>
+
+<div class="mb-3">
+    <label for="message" class="form-label">Сообщение:</label>
+    <input type="text" id="message" class="form-control" />
+</div>
+<div class="mb-3">
+    <button id="sendBtn" class="btn btn-primary" disabled>Отправить</button>
+</div>
+
+<div id="chatroom" class="mt-4 border rounded p-3 bg-light"></div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script>
+        const userName = "@Model.UserName";
+
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/chatHub")
+            .build();
+
+        document.getElementById("sendBtn").addEventListener("click", function () {
+            const message = document.getElementById("message").value;
+
+            hubConnection.invoke("SendMessage", userName, message)
+                .catch(err => console.error(err.toString()));
+        });
+
+        hubConnection.on("Receive", function (user, message) {
+            const userElem = document.createElement("b");
+            userElem.textContent = `${user}: `;
+
+            const msgElem = document.createElement("p");
+            msgElem.appendChild(userElem);
+            msgElem.appendChild(document.createTextNode(message));
+
+            const first = document.getElementById("chatroom").firstChild;
+            document.getElementById("chatroom").insertBefore(msgElem, first);
+        });
+
+        hubConnection.start()
+            .then(() => document.getElementById("sendBtn").disabled = false)
+            .catch(err => console.error(err.toString()));
+    </script>
+}

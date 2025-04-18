@@ -1,17 +1,20 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using StudentLibrary.Data;
+using StudentLibrary.Hubs;
 using StudentLibrary.Model;
 
 namespace StudentLibrary.Pages
 {
 
-    [Authorize(Roles = "Admin,User")]
-    public class StudentModel(ApplicationDbContext context) : PageModel
+    //[Authorize(Roles = "Admin,User")]
+    public class StudentModel(ApplicationDbContext context, IHubContext<ChatHub> hubContext) : PageModel
     {
         private readonly ApplicationDbContext _context = context;
+        private readonly IHubContext<ChatHub> _hubContext = hubContext;
 
         [BindProperty]
         public required Student Student { get; set; }
@@ -44,6 +47,8 @@ namespace StudentLibrary.Pages
                 _context.Students.Update(Student);
             }
             _context.SaveChanges();
+            //_hubContext.
+            _hubContext.Clients.All.SendAsync("Receive", "usr", "msg");
             return RedirectToPage("Students");
         }
     }
