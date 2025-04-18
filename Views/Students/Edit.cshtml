@@ -1,0 +1,95 @@
+﻿@model StudentLibrary.Model.Student
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";  // Указываем layout
+    ViewData["Title"] = Model.Id == 0 ? "Добавить студента" : "Редактировать студента";
+}
+
+<p>Model.Id: @Model?.Id</p>
+<p>Model.Name: @Model?.Name</p>
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h4 class="mb-0">@ViewData["Title"]</h4>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Edit" method="post" class="needs-validation" novalidate>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Имя:</label>
+                        <input type="text" class="form-control" asp-for="Name" required />
+                        <span class="text-danger" asp-validation-for="Name"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Email:</label>
+                        <input type="email" class="form-control" asp-for="Email" />
+                        <span class="text-danger" asp-validation-for="Email"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Телефон:</label>
+                        <input type="tel" class="form-control" asp-for="Phone" />
+                        <span class="text-danger" asp-validation-for="Phone"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Дата рождения:</label>
+                        <input type="date" class="form-control" asp-for="BirthDate" required />
+                        <span class="text-danger" asp-validation-for="BirthDate"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Пол:</label>
+                        <select class="form-select" asp-for="Gender">
+                            <option value="Male">Мужской</option>
+                            <option value="Female">Женский</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="Gender"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Факультет:</label>
+                        <select class="form-select" asp-for="Faculty">
+                            <option value="IT">IT</option>
+                            <option value="Economics">Экономика</option>
+                            <option value="Physics">Физика</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Курс:</label>
+                        <input type="number" class="form-control" asp-for="Course" min="1" max="5" required />
+                        <span class="text-danger" asp-validation-for="Course"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Адрес:</label>
+                        <textarea class="form-control" asp-for="Address"></textarea>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Комментарии:</label>
+                        <textarea class="form-control" asp-for="Comments"></textarea>
+                    </div>
+
+                    <div class="col-md-6 mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" asp-for="IsActive" />
+                        <label class="form-check-label fw-bold" asp-for="IsActive">Активен</label>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2 justify-content-center mt-4">
+                    <button type="submit" class="btn btn-success px-4">Сохранить</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

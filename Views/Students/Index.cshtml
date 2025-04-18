@@ -1,0 +1,35 @@
+﻿@model List<StudentLibrary.Model.Student>
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";  // Указываем layout
+}
+<div class="container mt-5">
+    <a class="btn btn-primary mb-3" href="@Url.Action("Edit", "Students", new { id = 0 })">Добавить студента</a>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var student in Model)
+        {
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@student.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@student.Email</h6>
+                        <p class="card-text">
+                            <strong>Телефон:</strong> @student.Phone <br />
+                            <strong>Дата рождения:</strong> @student.BirthDate.ToShortDateString() <br />
+                            <strong>Пол:</strong> @student.Gender <br />
+                            <strong>Активен:</strong> @(student.IsActive ? "Да" : "Нет")
+                        </p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <a href="@Url.Action("Edit", "Students", new { id = student.Id })" class="btn btn-warning">Изменить</a>
+                        <form method="post" asp-action="Delete" asp-controller="Students" asp-route-id="@student.Id" class="d-inline">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить студента?')">Удалить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
