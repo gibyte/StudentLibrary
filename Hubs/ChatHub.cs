@@ -1,20 +1,32 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using System.Collections.Concurrent;
 
 namespace StudentLibrary.Hubs
 {
     public class ChatHub : Hub
     {
-        public async Task Receive(string user, string message)
+        private static readonly ConcurrentDictionary<string, string> OnlineUsers = new();
+
+        public override async Task OnConnectedAsync()
+        {
+            var userName = Context.User?.Identity?.Name ?? Context.ConnectionId;
+            OnlineUsers[Context.ConnectionId] = userName;
+
+            await Clients.All.SendAsync("UserListUpdate", OnlineUsers.Values.Distinct().ToList());
+            await base.OnConnectedAsync();
+        }
+
+        public override async Task OnDisconnectedAsync(Exception? exception)
+        {
+            OnlineUsers.TryRemove(Context.ConnectionId, out _);
+            await Clients.All.SendAsync("UserListUpdate", OnlineUsers.Values.Distinct().ToList());
+            await base.OnDisconnectedAsync(exception);
+        }
+
+        public async Task SendMessage(string user, string message)
         {
             await Clients.All.SendAsync("Receive", user, message);
         }
-        public async Task SendMessage(string message, string user)
-        {
-            await Clients.All.SendAsync("Receive", message, user);
-        }
-        public async Task UpStudent()
-        {
-            await Clients.All.SendAsync("UpStudent");
-        }    
+
     }
 }
