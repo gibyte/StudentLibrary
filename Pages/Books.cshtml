@@ -11,7 +11,7 @@
     @foreach (var book in Model.Books)
     {
         <div class="col">
-            <div class="card h-100">
+            <div class="card h-100" id="book-@book.Id">
                 <div class="card-body">
                     <h5 class="card-title">@book.Title</h5>
                     <h6 class="card-subtitle mb-2 text-muted">@book.Author</h6>
@@ -26,3 +26,39 @@
         </div>
     }
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.0/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chathub")
+        .build();
+
+    connection.on("BookUpdated", function (book) {
+        const existingCard = document.getElementById("book-" + book.id);
+        const html = `
+            <div class="card h-100" id="book-${book.id}">
+                <div class="card-body">
+                    <h5 class="card-title">${book.title}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">${book.author}</h6>
+                    <p class="card-text">Published: ${book.year}</p>
+                    <p class="card-text">Available: ${book.isAvailable ? "Yes" : "No"}</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="/Book?id=${book.id}" class="btn btn-warning">Edit</a>
+                    <a href="javascript:void(0);" class="btn btn-danger" onclick="if (confirm('Are you sure you want to delete?')) { window.location.href = '/BookDelete?id=${book.id}'; }">Delete</a>
+                </div>
+            </div>`;
+
+        if (existingCard) {
+            existingCard.outerHTML = html;
+        } else {
+            const container = document.querySelector(".row");
+            const wrapper = document.createElement("div");
+            wrapper.className = "col";
+            wrapper.innerHTML = html;
+            container.appendChild(wrapper);
+        }
+    });
+
+    connection.start().catch(err => console.error(err.toString()));
+</script>
