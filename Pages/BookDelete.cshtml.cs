@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StudentLibrary.Data;
 
 namespace StudentLibrary.Pages
 {
+    [Authorize(Roles = "Admin")]// авторизация
     public class BookDeleteModel : PageModel
     {
         private readonly ApplicationDbContext _context;

@@ -1,0 +1,40 @@
+﻿@page
+@model StudentLibrary.Pages.Account.ProfileModel
+@{
+    ViewData["Title"] = "Профиль";
+}
+
+<div class="card mt-3">
+    <div class="card-body">
+        <h5 class="card-title">Добро пожаловать, @Model.CurrentUser.Email!</h5>
+
+        <form method="post" class="mt-3">
+            <input type="hidden" asp-for="CurrentUser.Id" />
+            <input type="hidden" asp-for="CurrentUser.Password" />
+            <div class="mb-3">
+                <label asp-for="CurrentUser.Email" class="form-label">Email</label>
+                <input asp-for="CurrentUser.Email" class="form-control" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CurrentUser.Role" class="form-label">Роль</label>
+                @if (Model.IsAdmin)
+                {
+                    <select asp-for="CurrentUser.Role" class="form-select">
+                        <option>User</option>
+                        <option>Admin</option>
+                    </select>
+                }
+                else
+                {
+                    <input asp-for="CurrentUser.Role" class="form-control" readonly />
+                }
+            </div>
+
+            @if (Model.IsAdmin)
+            {
+                <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+            }
+        </form>
+    </div>
+</div>

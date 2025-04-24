@@ -12,8 +12,8 @@ using StudentLibrary.Data;
 namespace StudentLibrary.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250221151510_UpStudent")]
-    partial class UpStudent
+    [Migration("20250412051215_role")]
+    partial class role
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,31 @@ namespace StudentLibrary.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("StudentLibrary.Model.AuthApp.AuthUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AuthUsers");
+                });
+
             modelBuilder.Entity("StudentLibrary.Model.Book", b =>
                 {
                     b.Property<int>("Id")
@@ -35,8 +60,7 @@ namespace StudentLibrary.Migrations
 
                     b.Property<string>("Author")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");

@@ -8,11 +8,10 @@ namespace StudentLibrary.Model
 
         [Required(ErrorMessage = "Требуется заголовок.")]
         [StringLength(100, ErrorMessage = "Заголовок не может быть длиннее 100 символов.")]
-        public required string Title { get; set; }
+        public string Title { get; set; }
 
         [Required(ErrorMessage = "Требуется автор.")]
-        [StringLength(100, ErrorMessage = "Автор не может быть длиннее 100 символов.")]
-        public required string Author { get; set; }
+        public string Author { get; set; }
 
         [Range(1000, 2100, ErrorMessage = "Год должен быть между 1000 и 2100.")]
         public int Year { get; set; }
