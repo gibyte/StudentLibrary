@@ -12,8 +12,8 @@ using StudentLibrary.Data;
 namespace StudentLibrary.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250412095511_auth6")]
-    partial class auth6
+    [Migration("20250526150839_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

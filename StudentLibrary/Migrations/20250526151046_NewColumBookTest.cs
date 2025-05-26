@@ -5,25 +5,25 @@
 namespace StudentLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class role : Migration
+    public partial class NewColumBookTest : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Role",
-                table: "AuthUsers",
-                type: "nvarchar(max)",
+            migrationBuilder.AddColumn<bool>(
+                name: "Test",
+                table: "Books",
+                type: "bit",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: false);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Role",
-                table: "AuthUsers");
+                name: "Test",
+                table: "Books");
         }
     }
 }

@@ -5,7 +5,7 @@ using StudentLibrary.Data;
 
 namespace StudentLibrary.Pages
 {
-    [Authorize(Roles = "Admin")]// авторизация
+    //[Authorize(Roles = "Admin")]// авторизация
     public class BookDeleteModel : PageModel
     {
         private readonly ApplicationDbContext _context;

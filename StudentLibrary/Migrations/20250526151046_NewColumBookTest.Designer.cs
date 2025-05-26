@@ -12,8 +12,8 @@ using StudentLibrary.Data;
 namespace StudentLibrary.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250411171745_init")]
-    partial class init
+    [Migration("20250526151046_NewColumBookTest")]
+    partial class NewColumBookTest
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,6 +41,10 @@ namespace StudentLibrary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("AuthUsers");
@@ -59,6 +63,9 @@ namespace StudentLibrary.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Test")
                         .HasColumnType("bit");
 
                     b.Property<string>("Title")
